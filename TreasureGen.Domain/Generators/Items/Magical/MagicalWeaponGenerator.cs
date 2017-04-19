@@ -7,6 +7,7 @@ using TreasureGen.Domain.Selectors.Percentiles;
 using TreasureGen.Domain.Tables;
 using TreasureGen.Items;
 using TreasureGen.Items.Magical;
+using System.Collections.Generic;
 
 namespace TreasureGen.Domain.Generators.Items.Magical
 {
@@ -144,6 +145,11 @@ namespace TreasureGen.Domain.Generators.Items.Magical
             weapon.Magic.SpecialAbilities = specialAbilitiesGenerator.GenerateFor(template.Magic.SpecialAbilities);
 
             return weapon;
+        }
+
+        public Item GenerateFromSubset(string power, IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

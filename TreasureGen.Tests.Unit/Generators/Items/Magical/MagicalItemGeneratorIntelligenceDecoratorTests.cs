@@ -93,5 +93,23 @@ namespace TreasureGen.Tests.Unit.Generators.Items.Magical
             Assert.That(decoratedItem.Magic.Intelligence, Is.Not.EqualTo(intelligence));
             Assert.That(decoratedItem.Magic.Intelligence.Ego, Is.EqualTo(0));
         }
+
+        [Test]
+        public void GenerateFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateDefaultFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateFromEmptySubset()
+        {
+            Assert.That(() => generator.GenerateFromSubset(Enumerable.Empty<string>()), Throws.ArgumentException.With.Message.EqualTo("Cannot generate from an empty collection subset"));
+        }
     }
 }

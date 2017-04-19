@@ -6,6 +6,7 @@ using TreasureGen.Domain.Selectors.Percentiles;
 using TreasureGen.Domain.Tables;
 using TreasureGen.Items;
 using TreasureGen.Items.Magical;
+using System;
 
 namespace TreasureGen.Domain.Generators.Items.Magical
 {
@@ -192,6 +193,11 @@ namespace TreasureGen.Domain.Generators.Items.Magical
             item.ItemType = ItemTypeConstants.WondrousItem;
 
             return item.SmartClone();
+        }
+
+        public Item GenerateFromSubset(string power, IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

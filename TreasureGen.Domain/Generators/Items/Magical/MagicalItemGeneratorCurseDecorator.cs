@@ -1,4 +1,6 @@
-﻿using TreasureGen.Domain.Tables;
+﻿using System;
+using System.Collections.Generic;
+using TreasureGen.Domain.Tables;
 using TreasureGen.Items;
 using TreasureGen.Items.Magical;
 
@@ -45,6 +47,11 @@ namespace TreasureGen.Domain.Generators.Items.Magical
             }
 
             return item;
+        }
+
+        public Item GenerateFromSubset(string power, IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

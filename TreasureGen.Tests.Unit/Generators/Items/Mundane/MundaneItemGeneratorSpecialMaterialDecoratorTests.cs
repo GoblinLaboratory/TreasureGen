@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using TreasureGen.Domain.Generators.Items.Mundane;
 using TreasureGen.Domain.Items.Mundane;
 using TreasureGen.Items;
@@ -139,6 +140,24 @@ namespace TreasureGen.Tests.Unit.Generators.Items.Mundane
             Assert.That(decoratedItem, Is.Not.EqualTo(template));
             Assert.That(decoratedItem, Is.EqualTo(item));
             Assert.That(decoratedItem.Traits, Is.Empty);
+        }
+
+        [Test]
+        public void GenerateFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateDefaultFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateFromEmptySubset()
+        {
+            Assert.That(() => decorator.GenerateFromSubset(Enumerable.Empty<string>()), Throws.ArgumentException.With.Message.EqualTo("Cannot generate from an empty collection subset"));
         }
     }
 }

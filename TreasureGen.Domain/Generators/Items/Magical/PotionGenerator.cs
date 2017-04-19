@@ -1,4 +1,6 @@
-﻿using TreasureGen.Domain.Selectors.Percentiles;
+﻿using System;
+using System.Collections.Generic;
+using TreasureGen.Domain.Selectors.Percentiles;
 using TreasureGen.Domain.Tables;
 using TreasureGen.Items;
 using TreasureGen.Items.Magical;
@@ -42,6 +44,11 @@ namespace TreasureGen.Domain.Generators.Items.Magical
             potion.Quantity = 1;
 
             return potion.SmartClone();
+        }
+
+        public Item GenerateFromSubset(string power, IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

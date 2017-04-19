@@ -116,5 +116,10 @@ namespace TreasureGen.Items
 
             return clone;
         }
+
+        public bool NameMatches(string name)
+        {
+            return Name == name || BaseNames.Contains(name);
+        }
     }
 }

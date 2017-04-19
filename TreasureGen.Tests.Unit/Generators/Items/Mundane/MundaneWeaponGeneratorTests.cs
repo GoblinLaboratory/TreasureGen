@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using RollGen;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using TreasureGen.Domain.Generators.Items.Mundane;
 using TreasureGen.Domain.Selectors.Attributes;
 using TreasureGen.Domain.Selectors.Percentiles;
@@ -290,6 +292,79 @@ namespace TreasureGen.Tests.Unit.Generators.Items.Mundane
             Assert.That(weapon.Name, Is.EqualTo(compositeBow));
             Assert.That(weapon.Attributes, Is.EqualTo(attributes));
             Assert.That(weapon.Traits, Contains.Item($"+{bonus} Strength bonus"));
+        }
+
+        [Test]
+        public void GenerateFromSubset()
+        {
+            mockPercentileSelector.SetupSequence(p => p.SelectFrom(TableNameConstants.Percentiles.Set.MundaneWeapons))
+                .Returns("weapon type")
+                .Returns("other weapon type")
+                .Returns("weapon type");
+
+            var tableName = string.Format(TableNameConstants.Percentiles.Formattable.WEAPONTYPEWeapons, "weapon type");
+            mockPercentileSelector.SetupSequence(p => p.SelectFrom(tableName)).Returns("wrong weapon name").Returns("weapon name");
+
+            tableName = string.Format(TableNameConstants.Percentiles.Formattable.WEAPONTYPEWeapons, "other weapon type");
+            mockPercentileSelector.Setup(p => p.SelectFrom(tableName)).Returns("other weapon name");
+
+            var baseNames = new[] { "base name", "other base name" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Collections.Set.ItemGroups, "weapon name")).Returns(baseNames);
+
+            var attributes = new[] { "type 1", "type 2" };
+            tableName = string.Format(TableNameConstants.Collections.Formattable.ITEMTYPEAttributes, ItemTypeConstants.Weapon);
+            mockCollectionsSelector.Setup(p => p.SelectFrom(tableName, "weapon name")).Returns(attributes);
+
+            Assert.Fail("Need to finish fleshing out weapon");
+
+            var subset = new[] { "other weapon name", "weapon name" };
+
+            var weapon = mundaneWeaponGenerator.GenerateFromSubset(subset);
+            Assert.That(weapon.Name, Is.EqualTo("other weapon name"));
+            Assert.That(weapon.BaseNames, Is.EquivalentTo(baseNames));
+            Assert.That(weapon.Attributes, Is.EqualTo(attributes));
+            Assert.That(weapon.ItemType, Is.EqualTo(ItemTypeConstants.Tool));
+            Assert.That(weapon.IsMagical, Is.False);
+            Assert.That(weapon.Contents, Is.Empty);
+            Assert.That(weapon.Quantity, Is.EqualTo(1));
+            Assert.That(weapon.Traits, Is.Empty);
+        }
+
+        [Test]
+        public void GenerateAmmunitionFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateThrownWeaponFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateDefaultFromSubset()
+        {
+            var subset = new[] { "other tool", "tool" };
+            mockPercentileSelector.Setup(p => p.SelectFrom(TableNameConstants.Percentiles.Set.Tools)).Returns("wrong tool");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(subset)).Returns((IEnumerable<string> ss) => ss.Last());
+            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Percentiles.Set.MundaneGearSizes)).Returns("size");
+
+            var weapon = mundaneWeaponGenerator.GenerateFromSubset(subset);
+            Assert.That(weapon.Name, Is.EqualTo("tool"));
+            Assert.That(weapon.BaseNames.Single(), Is.EqualTo("tool"));
+            Assert.That(weapon.Attributes, Is.Empty);
+            Assert.That(weapon.ItemType, Is.EqualTo(ItemTypeConstants.Tool));
+            Assert.That(weapon.IsMagical, Is.False);
+            Assert.That(weapon.Contents, Is.Empty);
+            Assert.That(weapon.Quantity, Is.EqualTo(1));
+            Assert.That(weapon.Traits, Contains.Item("size"));
+        }
+
+        [Test]
+        public void GenerateFromEmptySubset()
+        {
+            Assert.That(() => mundaneWeaponGenerator.GenerateFromSubset(Enumerable.Empty<string>()), Throws.ArgumentException.With.Message.EqualTo("Cannot generate from an empty collection subset"));
         }
     }
 }

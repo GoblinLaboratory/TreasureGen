@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TreasureGen.Items;
 using TreasureGen.Items.Magical;
 
@@ -24,6 +25,11 @@ namespace TreasureGen.Domain.Generators.Items.Magical
                 throw new ArgumentException();
 
             return innerGenerator.GenerateAtPower(power);
+        }
+
+        public Item GenerateFromSubset(string power, IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

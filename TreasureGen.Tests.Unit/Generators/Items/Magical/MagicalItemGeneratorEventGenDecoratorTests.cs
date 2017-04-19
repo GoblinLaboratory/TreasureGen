@@ -78,5 +78,23 @@ namespace TreasureGen.Tests.Unit.Generators.Items
             mockEventQueue.Verify(q => q.Enqueue("TreasureGen", $"Beginning magical item generation from template: {template.ItemType} {template.Name}"), Times.Once);
             mockEventQueue.Verify(q => q.Enqueue("TreasureGen", $"Completed generation of {innerItem.ItemType} {innerItem.Name}"), Times.Once);
         }
+
+        [Test]
+        public void GenerateFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateDefaultFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateFromEmptySubset()
+        {
+            Assert.That(() => generator.GenerateFromSubset(Enumerable.Empty<string>()), Throws.ArgumentException.With.Message.EqualTo("Cannot generate from an empty collection subset"));
+        }
     }
 }

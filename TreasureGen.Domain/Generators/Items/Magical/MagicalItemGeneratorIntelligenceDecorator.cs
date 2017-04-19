@@ -1,4 +1,6 @@
-﻿using TreasureGen.Items;
+﻿using System;
+using System.Collections.Generic;
+using TreasureGen.Items;
 using TreasureGen.Items.Magical;
 
 namespace TreasureGen.Domain.Generators.Items.Magical
@@ -32,6 +34,11 @@ namespace TreasureGen.Domain.Generators.Items.Magical
                 item.Magic.Intelligence = intelligenceGenerator.GenerateFor(item);
 
             return item;
+        }
+
+        public Item GenerateFromSubset(string power, IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

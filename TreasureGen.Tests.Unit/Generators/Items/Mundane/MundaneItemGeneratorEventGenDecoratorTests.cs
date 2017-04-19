@@ -2,6 +2,7 @@
 using Moq;
 using NUnit.Framework;
 using System;
+using System.Linq;
 using TreasureGen.Domain.Generators.Items.Mundane;
 using TreasureGen.Items;
 using TreasureGen.Items.Mundane;
@@ -77,6 +78,24 @@ namespace TreasureGen.Tests.Unit.Generators.Items
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
             mockEventQueue.Verify(q => q.Enqueue("TreasureGen", $"Beginning mundane item generation from template: {template.ItemType} {template.Name}"), Times.Once);
             mockEventQueue.Verify(q => q.Enqueue("TreasureGen", $"Completed generation of {innerItem.ItemType} {innerItem.Name}"), Times.Once);
+        }
+
+        [Test]
+        public void GenerateFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateDefaultFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateFromEmptySubset()
+        {
+            Assert.That(() => decorator.GenerateFromSubset(Enumerable.Empty<string>()), Throws.ArgumentException.With.Message.EqualTo("Cannot generate from an empty collection subset"));
         }
     }
 }

@@ -678,5 +678,33 @@ namespace TreasureGen.Tests.Unit.Generators.Items
             Assert.That(clone.Magic.SpecialAbilities, Is.EquivalentTo(template.Magic.SpecialAbilities));
             Assert.That(clone.Traits, Is.SupersetOf(template.Traits));
         }
+
+        [Test]
+        public void NameMatchesIfName()
+        {
+            item.Name = "name";
+            item.BaseNames = new[] { "base name", "other base name" };
+
+            Assert.That(item.NameMatches("name"), Is.True);
+        }
+
+        [Test]
+        public void NameMatchesIfAnyBaseName()
+        {
+            item.Name = "name";
+            item.BaseNames = new[] { "base name", "other base name" };
+
+            Assert.That(item.NameMatches("base name"), Is.True);
+            Assert.That(item.NameMatches("other base name"), Is.True);
+        }
+
+        [Test]
+        public void NameDoesNotMatch()
+        {
+            item.Name = "name";
+            item.BaseNames = new[] { "base name", "other base name" };
+
+            Assert.That(item.NameMatches("wrong name"), Is.False);
+        }
     }
 }

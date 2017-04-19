@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TreasureGen.Domain.Selectors.Attributes;
 using TreasureGen.Domain.Selectors.Percentiles;
 using TreasureGen.Domain.Tables;
@@ -70,6 +72,11 @@ namespace TreasureGen.Domain.Generators.Items.Mundane
             }
 
             return armor;
+        }
+
+        public Item GenerateFromSubset(IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

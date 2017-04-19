@@ -2,6 +2,7 @@
 using System;
 using TreasureGen.Items;
 using TreasureGen.Items.Magical;
+using System.Collections.Generic;
 
 namespace TreasureGen.Domain.Generators.Items.Magical
 {
@@ -49,6 +50,11 @@ namespace TreasureGen.Domain.Generators.Items.Magical
             }
 
             return scroll;
+        }
+
+        public Item GenerateFromSubset(string power, IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
 
         private int GetQuantity(string power)

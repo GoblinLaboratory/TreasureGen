@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TreasureGen.Domain.Items.Mundane;
 using TreasureGen.Items;
 using TreasureGen.Items.Mundane;
@@ -51,6 +53,11 @@ namespace TreasureGen.Domain.Generators.Items.Mundane
             }
 
             return item;
+        }
+
+        public Item GenerateFromSubset(IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

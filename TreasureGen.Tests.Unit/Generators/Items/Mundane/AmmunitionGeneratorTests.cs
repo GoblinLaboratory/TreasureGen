@@ -205,5 +205,23 @@ namespace TreasureGen.Tests.Unit.Generators.Items.Mundane
             Assert.That(ammunition.Attributes, Is.EqualTo(attributes));
             Assert.That(ammunition.BaseNames.Single(), Is.EqualTo(name));
         }
+
+        [Test]
+        public void GenerateFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateDefaultFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateFromEmptySubset()
+        {
+            Assert.That(() => ammunitionGenerator.GenerateFrom(Enumerable.Empty<string>()), Throws.ArgumentException.With.Message.EqualTo("Cannot generate from an empty collection subset"));
+        }
     }
 }

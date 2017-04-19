@@ -1,4 +1,6 @@
-﻿using TreasureGen.Domain.Selectors.Percentiles;
+﻿using System;
+using System.Collections.Generic;
+using TreasureGen.Domain.Selectors.Percentiles;
 using TreasureGen.Domain.Tables;
 using TreasureGen.Items;
 using TreasureGen.Items.Mundane;
@@ -32,6 +34,11 @@ namespace TreasureGen.Domain.Generators.Items.Mundane
             tool.BaseNames = new[] { tool.Name };
 
             return tool;
+        }
+
+        public Item GenerateFromSubset(IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -78,5 +78,23 @@ namespace TreasureGen.Tests.Unit.Generators.Items.Magical
             Assert.That(potion.ItemType, Is.EqualTo(ItemTypeConstants.Potion));
             Assert.That(potion.Quantity, Is.EqualTo(1));
         }
+
+        [Test]
+        public void GenerateFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateDefaultFromSubset()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GenerateFromEmptySubset()
+        {
+            Assert.That(() => generator.GenerateFromSubset(Enumerable.Empty<string>()), Throws.ArgumentException.With.Message.EqualTo("Cannot generate from an empty collection subset"));
+        }
     }
 }

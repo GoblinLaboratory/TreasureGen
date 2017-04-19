@@ -1,4 +1,6 @@
-﻿using EventGen;
+﻿using System;
+using System.Collections.Generic;
+using EventGen;
 using TreasureGen.Items;
 using TreasureGen.Items.Mundane;
 
@@ -31,6 +33,11 @@ namespace TreasureGen.Domain.Generators.Items.Mundane
             eventQueue.Enqueue("TreasureGen", $"Completed generation of {item.ItemType} {item.Name}");
 
             return item;
+        }
+
+        public Item GenerateFromSubset(IEnumerable<string> subset)
+        {
+            throw new NotImplementedException();
         }
     }
 }
